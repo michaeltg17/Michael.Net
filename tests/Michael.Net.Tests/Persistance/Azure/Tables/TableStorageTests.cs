@@ -54,8 +54,6 @@ namespace Michael.Net.Tests.Persistence.Azure.Tables
                 .Excluding(e => e.ETag));
         }
 
-
-
         public void Dispose()
         {
             var storage = GetTableStorage();
