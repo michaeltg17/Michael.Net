@@ -9,6 +9,9 @@ namespace Michael.Net.Tests.Persistence.Azure.Blobs
 {
     public class BlobStorageTests : IDisposable
     {
+        //const string SkipOrNot = null; // Run all tests
+        const string SkipOrNot = "Payment service"; // Skip all tests
+
         readonly List<string> blobsToDelete = new();
 
         static BlobStorage GetBlobStorage()
@@ -29,7 +32,7 @@ namespace Michael.Net.Tests.Persistence.Azure.Blobs
             return (stream, content, fullFileName);
         }
 
-        [Fact]
+        [Fact(Skip = SkipOrNot)]
         public async Task GivenFile_WhenUpload_Uploaded()
         {
             //Given
@@ -46,7 +49,7 @@ namespace Michael.Net.Tests.Persistence.Azure.Blobs
             await ValidateNoTransactionalBackupBlobsLeft();
         }
 
-        [Fact]
+        [Fact(Skip = SkipOrNot)]
         public async Task GivenFile_WhenUploadInOkTransaction_Uploaded()
         {
             //Given
@@ -67,7 +70,7 @@ namespace Michael.Net.Tests.Persistence.Azure.Blobs
             await ValidateNoTransactionalBackupBlobsLeft();
         }
 
-        [Fact]
+        [Fact(Skip = SkipOrNot)]
         public async Task GivenFile_WhenUploadInFailedTransaction_Deleted()
         {
             //Given
@@ -86,7 +89,7 @@ namespace Michael.Net.Tests.Persistence.Azure.Blobs
             await ValidateNoTransactionalBackupBlobsLeft();
         }
 
-        [Fact]
+        [Fact(Skip = SkipOrNot)]
         public async Task GivenBlob_WhenDelete_Deleted()
         {
             //Given
@@ -102,7 +105,7 @@ namespace Michael.Net.Tests.Persistence.Azure.Blobs
             await ValidateNoTransactionalBackupBlobsLeft();
         }
 
-        [Fact]
+        [Fact(Skip = SkipOrNot)]
         public async Task GivenBlob_WhenDeleteInOkTransaction_Deleted()
         {
             //Given
@@ -122,7 +125,7 @@ namespace Michael.Net.Tests.Persistence.Azure.Blobs
             await ValidateNoTransactionalBackupBlobsLeft();
         }
 
-        [Fact]
+        [Fact(Skip = SkipOrNot)]
         public async Task GivenBlob_WhenDeleteInFailedTransaction_NotDeleted()
         {
             //Given
@@ -142,7 +145,7 @@ namespace Michael.Net.Tests.Persistence.Azure.Blobs
             await ValidateNoTransactionalBackupBlobsLeft();
         }
 
-        [Fact]
+        [Fact(Skip = SkipOrNot)]
         public async Task GivenBlob_WhenDeleteUploadInFailedTransaction_OriginalBlob()
         {
             //Given

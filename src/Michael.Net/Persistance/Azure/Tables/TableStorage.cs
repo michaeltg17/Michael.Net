@@ -8,7 +8,7 @@ namespace Michael.Net.Persistence.Azure.Tables
         readonly string connectionString;
         readonly string? tableName;
 
-        public TableStorage(string connectionString, string tableName = null)
+        public TableStorage(string connectionString, string? tableName = null)
         {
             this.connectionString = connectionString.ThrowIfNullEmptyOrWhiteSpace();
             this.tableName = tableName;

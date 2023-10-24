@@ -7,6 +7,9 @@ namespace Michael.Net.Tests.Persistence.Azure.Tables
 {
     public class TableStorageTests : IDisposable
     {
+        //const string SkipOrNot = null; // Run all tests
+        const string SkipOrNot = "Payment service"; // Skip all tests
+
         readonly List<ITableEntity> entitiesToDelete = new();
 
         static TableStorage GetTableStorage()
@@ -14,7 +17,7 @@ namespace Michael.Net.Tests.Persistence.Azure.Tables
             return new TableStorage(Settings.AzureStorageAccountConnectionString, "tests");
         }
 
-        [Fact]
+        [Fact(Skip = SkipOrNot)]
         public async Task GivenEntity_WhenInsert_Inserted()
         {
             //Given
