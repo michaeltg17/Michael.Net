@@ -1,8 +1,7 @@
 ﻿namespace Michael.Net.Domain
 {
-    public interface IEntity
+    public interface IIdentifiable
     {
         public long Id { get; set; }
-        public Guid Guid { get; set; }
     }
 }
