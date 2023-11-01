@@ -9,6 +9,21 @@ namespace Michael.Net.Persistance.EntityFrameworkCore.Interceptors
     {
         public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
         {
+            SetAuditedInfo(eventData);
+            return base.SavingChanges(eventData, result);
+        }
+
+        public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+            DbContextEventData eventData,
+            InterceptionResult<int> result,
+            CancellationToken cancellationToken = default)
+        {
+            SetAuditedInfo(eventData);
+            return base.SavingChangesAsync(eventData, result, cancellationToken);
+        }
+
+        void SetAuditedInfo(DbContextEventData eventData)
+        {
             var entries = eventData.Context!.ChangeTracker.Entries();
 
             entries.ForEach(e =>
@@ -25,8 +40,6 @@ namespace Michael.Net.Persistance.EntityFrameworkCore.Interceptors
                     entity.ModifiedOn = DateTime.UtcNow;
                 }
             });
-            
-            return base.SavingChanges(eventData, result);
         }
     }
 }
