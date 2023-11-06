@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Persistance\EntityFrameworkCore\Extensions\" />
+    <Folder Include="Testing\" />
   </ItemGroup>
 
 </Project>
