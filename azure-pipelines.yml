@@ -22,11 +22,6 @@ jobs:
     inputs:
       command: 'test'
       projects: '**/*.Tests.csproj'
-- job: PackAndPush
-  displayName: "Pack and push"
-  dependsOn: BuildAndTest
-  condition: succeeded()
-  steps:
   - task: DotNetCoreCLI@2
     displayName: "Pack"
     inputs:
