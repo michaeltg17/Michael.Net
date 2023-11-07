@@ -38,6 +38,6 @@ jobs:
     displayName: "Push"
     inputs:
       command: 'push'
-      packagesToPush: '**\*.nupkg;-:**\*.symbols.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)\*.nupkg;-:$(Build.ArtifactStagingDirectory)\*.symbols.nupkg'
       nuGetFeedType: 'internal'
       publishVstsFeed: 'fa87d356-d9e8-410c-bf26-0078ed3b4646/d6f03ca5-d849-4f99-8de6-b510f6143d44'
