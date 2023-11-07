@@ -25,8 +25,8 @@ jobs:
     inputs:
       command: 'test'
       projects: '**/*.Tests.csproj'
-- job: CreatePackage
-  displayName: "Create package"
+- job: PackAndPush
+  displayName: "Pack and push"
   dependsOn: BuildAndTest
   condition: succeeded()
   steps:
