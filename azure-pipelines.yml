@@ -2,8 +2,8 @@ pool:
   name: default
 
 jobs:
-- job: BuildAndTest
-  displayName: "Build and test"
+- job: CreatePackage
+  displayName: "Create package"
   steps:
   - task: DotNetCoreCLI@2
     displayName: "Restore"
