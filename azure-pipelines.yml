@@ -38,7 +38,8 @@ jobs:
       nobuild: true
       includesymbols: true
       includesource: true
-      versioningScheme: 'byBuildNumber'
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'Version'
   - task: DotNetCoreCLI@2
     displayName: "Push"
     inputs:
