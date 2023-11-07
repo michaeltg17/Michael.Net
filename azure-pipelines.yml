@@ -1,6 +1,8 @@
 pool:
   name: default
 
+trigger: none
+
 jobs:
 - job: CreatePackage
   displayName: "Create package"
