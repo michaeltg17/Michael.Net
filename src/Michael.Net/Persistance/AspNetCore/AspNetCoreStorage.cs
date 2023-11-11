@@ -50,7 +50,8 @@ namespace Michael.Net.Persistence.AspNetCore
 
             fileManager.Copy(temporalFilePath, filePath, true);
 
-            var baseUrl = serverAddressesFeature.Addresses.Single(url => url.Contains("https"));
+            var baseUrl = serverAddressesFeature.Addresses.SingleOrDefault(url => url.Contains("https"));
+            baseUrl ??= serverAddressesFeature.Addresses.Single(url => url.Contains("http"));
             var url = $"{baseUrl}{requestPath}/{fullFileName}";
 
             return Task.FromResult(url);
