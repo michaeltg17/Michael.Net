@@ -1,25 +1,20 @@
 ﻿using ChinhDo.Transactions;
-using Michael.Net.Persistence;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace Michael.Net.Persistence.AspNetCore
 {
     public class AspNetCoreStorage : IObjectStorage
     {
         readonly string path;
-        readonly string requestPath;
-        readonly IServerAddressesFeature serverAddressesFeature;
+        readonly string url;
         readonly IFileManager fileManager;
 
         public AspNetCoreStorage(
             string path,
-            string requestPath,
-            IServerAddressesFeature serverAddressesFeature,
+            string url,
             IFileManager fileManager)
         {
             this.path = path;
-            this.requestPath = requestPath;
-            this.serverAddressesFeature = serverAddressesFeature;
+            this.url = url;
             this.fileManager = fileManager;
         }
 
@@ -50,11 +45,9 @@ namespace Michael.Net.Persistence.AspNetCore
 
             fileManager.Copy(temporalFilePath, filePath, true);
 
-            var baseUrl = serverAddressesFeature.Addresses.SingleOrDefault(url => url.Contains("https"));
-            baseUrl ??= serverAddressesFeature.Addresses.Single(url => url.Contains("http"));
-            var url = $"{baseUrl}{requestPath}/{fullFileName}";
+            var fileUrl = $"{url}/{fullFileName}";
 
-            return Task.FromResult(url);
+            return Task.FromResult(fileUrl);
         }
     }
 }
