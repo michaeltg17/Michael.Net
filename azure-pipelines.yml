@@ -29,9 +29,9 @@ jobs:
     inputs:
       command: 'pack'
       packagesToPack: '**/Michael.Net.csproj'
+      configuration: 'Release'
       nobuild: true
-      versioningScheme: 'byEnvVar'
-      versionEnvVar: 'Version'
+      versioningScheme: 'off'
   - task: DotNetCoreCLI@2
     displayName: "Push"
     inputs:
