@@ -9,7 +9,7 @@ namespace Michael.Net.Extensions
         {
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStreamAsync();
-            var @object = await JsonSerializer.DeserializeAsync<T>(content);
+            var @object = await JsonSerializer.DeserializeAsync<T>(content, new JsonSerializerOptions(JsonSerializerDefaults.Web));
             return @object ?? throw new MichaelNetException("Deserialization from JSON failed. Result is null.");
         }
     }
