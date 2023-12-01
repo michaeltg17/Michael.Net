@@ -1,5 +1,6 @@
 ﻿using Michael.Net.Domain;
 using Michael.Net.Extensions;
+using Michael.Net.Extensions.DateTimeExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
@@ -32,12 +33,12 @@ namespace Michael.Net.Persistance.EntityFrameworkCore.Interceptors
                 if (e.State == EntityState.Added)
                 {
                     entity.CreatedBy = 1;
-                    entity.CreatedOn = DateTime.UtcNow;
+                    entity.CreatedOn = DateTime.UtcNow.Truncate(DateTimeResolution.Second);
                 }
                 else if (e.State == EntityState.Modified)
                 {
                     entity.ModifiedBy = 1;
-                    entity.ModifiedOn = DateTime.UtcNow;
+                    entity.ModifiedOn = DateTime.UtcNow.Truncate(DateTimeResolution.Second);
                 }
             });
         }
