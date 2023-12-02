@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-using FluentAssertions.Equivalency;
-using FluentAssertions.Execution;
+﻿using FluentAssertions.Equivalency;
 using System.Linq.Expressions;
 
 namespace Michael.Net.Testing.Extensions
@@ -18,23 +16,15 @@ namespace Michael.Net.Testing.Extensions
             return options;
         }
 
-        //public static EquivalencyAssertionOptions<TExpectation> WithPropertyConstraint<TExpectation, TProperty>(
-        //    this EquivalencyAssertionOptions<TExpectation> options, Action<IAssertionContext<TProperty>> action, Expression<TProperty> propertySelector)
-        //{
-        //    options
-        //        .Using<TProperty>(action)
-        //        .When(info => info.Path.EndsWith(propertySelector.Name));
-        //}
-
         public static EquivalencyAssertionOptions<TSubject> WithPropertyAssertion<TSubject, TProperty>(
             this EquivalencyAssertionOptions<TSubject> options,
-            Action<IAssertionContext<TProperty>> action,
-            Expression<Func<TSubject, TProperty>> propertySelector)
+            Expression<Func<TSubject, TProperty>> propertySelector,
+            Action<IAssertionContext<TProperty>> propertyAssertion)
         {
             var propertyName = ((MemberExpression)propertySelector.Body).Member.Name;
 
             return options
-                .Using<TProperty>(action)
+                .Using(propertyAssertion)
                 .When(info => info.Path.EndsWith(propertyName));
         }
     }
