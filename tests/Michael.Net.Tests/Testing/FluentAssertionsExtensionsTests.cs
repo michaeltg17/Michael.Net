@@ -43,5 +43,40 @@ namespace Michael.Net.Tests.Testing
             public int Id { get; set; }
             public string Name { get; set; } = default!;
         }
+
+        [Fact]
+        public void WhenNoExcluding_Fails()
+        {
+            //Given
+            var class1 = new Class2() { Id = 1, Classes1 = new Class1[] { new() { Id = 1, Name = "This name" } } };
+            var class2 = new Class2() { Id = 1, Classes1 = new Class1[] { new() { Id = 1, Name = "" } } };
+
+            //When
+            var assert = () => class1.Should().BeEquivalentTo(class2);
+
+            //Then
+            assert.Should().Throw<XunitException>()
+                .WithMessage(@"*Expected property class1.Classes1[0].Name to be """" with a length of 0, but ""This name"" has a length of 9*");
+        }
+
+        [Fact]
+        public void WhenExcludingCollectionProperty_Works()
+        {
+            //Given
+            var class1 = new Class2() { Id = 1, Classes1 = new Class1[] { new() { Id = 1, Name = "This name" } } };
+            var class2 = new Class2() { Id = 1, Classes1 = new Class1[] { new() { Id = 1, Name = "" } } };
+
+            //When
+            var assert = () => class1.Should().BeEquivalentTo(class2, o => o.ExcludingCollectionProperty(c => c.Classes1.First().Name));
+
+            //Then
+            assert.Should().NotThrow();
+        }
+
+        class Class2
+        {
+            public int Id { get; set; }
+            public IEnumerable<Class1> Classes1 { get; set; } = default!;
+        }
     }
 }
