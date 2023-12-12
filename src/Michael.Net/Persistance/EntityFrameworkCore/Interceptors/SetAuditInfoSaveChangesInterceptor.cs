@@ -23,7 +23,7 @@ namespace Michael.Net.Persistance.EntityFrameworkCore.Interceptors
             return base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 
-        void SetAuditedInfo(DbContextEventData eventData)
+        static void SetAuditedInfo(DbContextEventData eventData)
         {
             var entries = eventData.Context!.ChangeTracker.Entries();
 
