@@ -8,10 +8,7 @@ namespace Michael.Net.Persistence.AspNetCore
         readonly string url;
         readonly IFileManager fileManager;
 
-        public AspNetCoreStorage(
-            string path,
-            string url,
-            IFileManager fileManager)
+        public AspNetCoreStorage(string path, string url, IFileManager fileManager)
         {
             this.path = path;
             this.url = url;
