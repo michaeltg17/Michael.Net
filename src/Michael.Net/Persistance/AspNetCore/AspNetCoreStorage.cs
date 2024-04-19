@@ -2,19 +2,8 @@
 
 namespace Michael.Net.Persistence.AspNetCore
 {
-    public class AspNetCoreStorage : IObjectStorage
+    public class AspNetCoreStorage(string path, string url, IFileManager fileManager) : IObjectStorage
     {
-        readonly string path;
-        readonly string url;
-        readonly IFileManager fileManager;
-
-        public AspNetCoreStorage(string path, string url, IFileManager fileManager)
-        {
-            this.path = path;
-            this.url = url;
-            this.fileManager = fileManager;
-        }
-
         public Task Delete(string fullFileName)
         {
             throw new NotImplementedException();
